@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ديم الشمال للخدمات اللوجستية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- خط عربي جميل -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Tajawal',system-ui,-apple-system,sans-serif;
+      background:#f6f6f6;
+      color:#222;
+      line-height:1.8;
+    }
+    a{text-decoration:none;color:inherit;}
+
+    :root{
+      --primary:#e53935;
+      --dark:#111111;
+      --accent:#f2c94c;
+      --light:#ffffff;
+    }
+
+    .container{
+      width:min(1200px,94%);
+      margin:0 auto;
+    }
+
+    /* الهيدر */
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      background:rgba(17,17,17,0.9);
+      color:#fff;
+      backdrop-filter:blur(8px);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.75rem 0;
+      gap:1rem;
+    }
+    .logo-area{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+    }
+    .logo-area img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+    }
+    .logo-text-main{font-weight:700;font-size:1.1rem;}
+    .logo-text-sub{font-size:.8rem;opacity:.8;}
+
+    .nav-links{
+      display:flex;
+      gap:1.25rem;
+      font-size:.95rem;
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      position:relative;
+      padding-bottom:.15rem;
+    }
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      right:0;
+      bottom:0;
+      width:0;
+      height:2px;
+      background:var(--accent);
+      transition:width .25s;
+    }
+    .nav-links a:hover::after{width:100%;}
+
+    /* الهيرو */
+    .hero{
+      margin-top:64px;
+      min-height:80vh;
+      background:url('images/hero-road.jpg') center/cover no-repeat fixed;
+      position:relative;
+      color:#fff;
+      display:flex;
+      align-items:center;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,rgba(0,0,0,.8),rgba(0,0,0,.5));
+    }
+    .hero-content{
+      position:relative;
+      padding:4rem 0;
+    }
+    .hero-title{
+      font-size:2.5rem;
+      margin-bottom:1rem;
+    }
+    .hero-subtitle{
+      font-size:1.1rem;
+      max-width:550px;
+      margin-bottom:1rem;
+    }
+    .hero-tagline{
+      font-size:.95rem;
+      opacity:.9;
+      margin-bottom:2rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      margin-bottom:1.5rem;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:.7rem 1.6rem;
+      font-size:.95rem;
+      font-weight:500;
+      border:none;
+      cursor:pointer;
+      transition:.25s;
+    }
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 10px 25px rgba(229,57,53,0.35);
+    }
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(229,57,53,0.5);
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.7);
+      color:#fff;
+    }
+    .btn-ghost:hover{background:rgba(255,255,255,.08);}
+
+    .hero-contact-line{
+      font-size:.9rem;
+      opacity:.9;
+    }
+    .hero-contact-line span{
+      color:var(--accent);
+      font-weight:500;
+    }
+
+    /* الأقسام العامة */
+    section{padding:4rem 0;}
+    section:nth-of-type(odd){background:#ffffff;}
+    section:nth-of-type(even){background:#f6f6f6;}
+
+    .section-header{
+      text-align:right;
+      margin-bottom:2rem;
+    }
+    .section-title{
+      font-size:1.6rem;
+      color:var(--dark);
+      margin-bottom:.5rem;
+      position:relative;
+      display:inline-block;
+    }
+    .section-title::after{
+      content:'';
+      position:absolute;
+      right:0;
+      bottom:-.4rem;
+      width:60px;
+      height:3px;
+      background:var(--primary);
+    }
+    .section-subtitle{
+      font-size:.95rem;
+      color:#666;
+      max-width:520px;
+    }
+
+    .two-cols{
+      display:grid;
+      grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+      gap:2.5rem;
+      align-items:center;
+    }
+
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:1.5rem;
+    }
+    .card{
+      background:#fff;
+      border-radius:18px;
+      padding:1.4rem 1.3rem;
+      box-shadow:0 10px 25px rgba(0,0,0,0.05);
+      border:1px solid #eee;
+    }
+    .card-title{
+      font-weight:600;
+      margin-bottom:.5rem;
+      color:var(--dark);
+    }
+    .card p{
+      font-size:.9rem;
+      color:#555;
+    }
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-top:1rem;
+    }
+    .pill{
+      font-size:.85rem;
+      padding:.35rem .9rem;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #eee;
+      color:#444;
+    }
+
+    .why-list{
+      list-style:none;
+      display:grid;
+      gap:.9rem;
+      margin-top:1.2rem;
+    }
+    .why-list li::before{
+      content:'•';
+      color:var(--primary);
+      margin-left:.3rem;
+      font-size:1.2em;
+    }
+
+    .coverage-map{
+      border-radius:18px;
+      overflow:hidden;
+      min-height:260px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.05);
+      border:1px solid #eee;
+      background:#ddd;
+    }
+
+    .partners-logos{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1.5rem;
+      align-items:center;
+      margin-top:1.5rem;
+    }
+    .partner{
+      padding:.75rem 1.2rem;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #eee;
+      font-size:.9rem;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+      gap:2.2rem;
+    }
+    .contact-list{
+      list-style:none;
+      display:grid;
+      gap:.6rem;
+      margin-top:1rem;
+      font-size:.95rem;
+    }
+    .contact-list span.label{
+      font-weight:600;
+      color:var(--dark);
+    }
+    .contact-card{
+      background:#fff;
+      border-radius:18px;
+      padding:1.5rem;
+      box-shadow:0 10px 25px rgba(0,0,0,0.06);
+      border:1px solid #eee;
+    }
+
+    footer{
+      background:#111;
+      color:#eee;
+      padding:1.5rem 0;
+      font-size:.85rem;
+    }
+    .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    footer a{color:var(--accent);}
+
+    /* رسبونسيف */
+    @media(max-width:900px){
+      .nav{flex-wrap:wrap;}
+      .hero{background-attachment:scroll;}
+      .hero-title{font-size:2rem;}
+      .two-cols,
+      .card-grid,
+      .contact-grid{grid-template-columns:1fr;}
+      .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media(max-width:600px){
+      .card-grid{grid-template-columns:1fr;}
+      .hero{min-height:70vh;}
+      .hero-content{padding:3rem 0;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo-area">
+      <!-- غيّر مسار صورة اللوجو هنا -->
+      <img src="images/deem-logo.png" alt="شعار ديم الشمال">
+      <div>
+        <div class="logo-text-main">ديم الشمال</div>
+        <div class="logo-text-sub">للخدمات اللوجستية</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#hero">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#why">لماذا ديم الشمال؟</a>
+      <a href="#coverage">مناطق التغطية</a>
+      <a href="#partners">شركاؤنا</a>
+      <a href="#drivers">انضم للمناديب</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero" class="hero">
+  <div class="container hero-content">
+    <h1 class="hero-title">ديم الشمال للخدمات اللوجستية</h1>
+    <p class="hero-subtitle">
+      شريكك الموثوق في تشغيل وإدارة مناديب التوصيل للمطاعم والمتاجر في المنطقة الشمالية، مع متابعة ميدانية مستمرة لضمان توصيل منظم، سريع، وموثوق.
+    </p>
+    <p class="hero-tagline">
+      نربط متجرك بعملائك بتجربة توصيل تحافظ على سمعة متجرك ورضا عملائك.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://wa.me/966500244450" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+      <a class="btn btn-ghost" href="mailto:logistic@deemnorth.com?subject=طلب تعاقد مع ديم الشمال">طلب شراكة</a>
+    </div>
+    <div class="hero-contact-line">
+      📧 <span>logistic@deemnorth.com</span> &nbsp; | &nbsp; 📱 <span>+966500244450</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">من نحن</h2>
+      <p class="section-subtitle">
+        مؤسسة سعودية متخصصة في تشغيل وإدارة خدمات التوصيل للمطاعم والمتاجر، مع تركيز كامل على الانضباط في الوقت والمتابعة الميدانية.
+      </p>
+    </div>
+    <div class="two-cols">
+      <div>
+        <p>
+          ديم الشمال للخدمات اللوجستية تهتم بتنظيم حركة المناديب، ومتابعة الطلبات لحظة بلحظة، وتقديم خدمة مستقرة واحترافية تضمن تجربة مريحة لشركائنا وعملائهم.
+        </p>
+        <p>
+          نلتزم بسياسات المنصات والمتاجر المتعاقدة معنا، ونسعى إلى أن نكون الذراع اللوجستي الذي يعتمد عليه أصحاب المطاعم والمتاجر في المنطقة الشمالية.
+        </p>
+      </div>
+      <div>
+        <!-- استبدل الصورة بما يناسبك -->
+        <div class="coverage-map" style="background:url('images/about-logistics.jpg') center/cover no-repeat;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">خدماتنا</h2>
+      <p class="section-subtitle">
+        حلول تشغيل مناديب التوصيل مصممة لتناسب احتياج المطاعم والمتاجر، مع مرونة في التوسع ومتابعة ميدانية مستمرة.
+      </p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3 class="card-title">تشغيل مناديب التوصيل</h3>
+        <p>
+          إدارة وتشغيل مناديب التوصيل للمطاعم والمتاجر، مع متابعة الأداء اليومي والانضباط في التسليم.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">تنظيم الورديات والجداول</h3>
+        <p>
+          إعداد جداول عمل وورديات تغطي أوقات الذروة، مع إمكانية التعديل حسب ضغط الطلبات.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">متابعة الطلبات لحظة بلحظة</h3>
+        <p>
+          مراقبة حالة الطلبات والتواصل عند الحاجة لتقليل التأخير وتحسين تجربة العميل.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">مرونة في التوسع والتغطية</h3>
+        <p>
+          زيادة عدد المناديب أو فتح مناطق خدمة جديدة حسب احتياج الشريك ونمو أعماله.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">لماذا ديم الشمال؟</h2>
+      <p class="section-subtitle">
+        نركز على القيمة الفعلية لشركائنا من خلال الانضباط في الوقت، والمتابعة الميدانية، والتواصل الواضح.
+      </p>
+    </div>
+    <div class="two-cols">
+      <div>
+        <ul class="why-list">
+          <li><strong>انضباط في الوقت:</strong> التزام قدر الإمكان بمواعيد الاستلام والتسليم المتفق عليها.</li>
+          <li><strong>متابعة ميدانية:</strong> مراقبة أداء المناديب ومسار الطلبات وتحسين الأداء باستمرار.</li>
+          <li><strong>فريق مدرَّب:</strong> مناديب على دراية بتعليمات المنصات وطريقة التعامل مع العملاء.</li>
+          <li><strong>مرونة تشغيلية:</strong> قابلية التوسع في عدد المناديب ومناطق الخدمة حسب ضغط العمل.</li>
+          <li><strong>تواصل مباشر:</strong> قنوات تواصل واضحة عبر الواتساب والبريد لأي ملاحظات أو طلبات خاصة.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="contact-card">
+          <h3 class="card-title">جاهزون لدعم نمو متجرك</h3>
+          <p>
+            سواء كنت مطعمًا، مقهى، أو متجرًا إلكترونيًا، يمكننا تشغيل وإدارة فرق توصيل تخدم عملاءك داخل المنطقة الشمالية بأعلى مستوى من التنظيم.
+          </p>
+          <div class="pill-list">
+            <span class="pill">مطاعم</span>
+            <span class="pill">متاجر</span>
+            <span class="pill">مقاهي</span>
+            <span class="pill">متاجر إلكترونية</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">مناطق التغطية</h2>
+      <p class="section-subtitle">
+        نبدأ من المنطقة الشمالية مع قابلية التوسع لمدن ومناطق إضافية حسب احتياج شركائنا.
+      </p>
+    </div>
+    <div class="two-cols">
+      <div>
+        <p>حاليًا تغطي خدمات ديم الشمال للخدمات اللوجستية المناطق التالية:</p>
+        <ul class="why-list">
+          <li>تبوك</li>
+          <!-- أضف مدن أخرى هنا -->
+        </ul>
+        <p style="margin-top:1rem;">
+          ونعمل على دراسة التوسع لمناطق ومدن جديدة وفقًا لاحتياج شركائنا في الأعمال ونمو حجم الطلبات.
+        </p>
+      </div>
+      <div>
+        <div class="coverage-map">
+          <!-- خريطة تبوك - يمكنك تعديل الرابط لاحقًا إذا حبيت -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d347969.66377195796!2d36.3807771!3d28.4101635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b9e19ab6b740b%3A0x60904a43866f450!2sTabuk!5e0!3m2!1sar!2ssa!4v0000000000000"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">شركاؤنا</h2>
+      <p class="section-subtitle">
+        نفخر بخدمة مطاعم ومتاجر تعمل من خلال منصات توصيل معروفة في المملكة، ومن ضمنها منصة هنقرستيشن.
+      </p>
+    </div>
+    <div class="partners-logos">
+      <div class="partner">منصات توصيل</div>
+      <div class="partner">مطاعم ومتاجر محلية</div>
+      <div class="partner">متاجر إلكترونية</div>
+      <!-- يمكنك إضافة شعارات فعلية هنا بصور -->
+    </div>
+  </div>
+</section>
+
+<section id="drivers">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">انضم إلى فريق المناديب</h2>
+      <p class="section-subtitle">
+        إذا كنت ترغب في العمل كمندوب توصيل مع ديم الشمال للخدمات اللوجستية، يسعدنا استلام طلبك والانضمام إلى فريقنا.
+      </p>
+    </div>
+    <div class="two-cols">
+      <div>
+        <p>
+          نبحث عن مناديب ملتزمين، منظمين، ويقدّرون أهمية الوقت وحسن التعامل مع العملاء. نوفّر بيئة عمل مبنية على الاحترام والتعاون، مع إمكانية زيادة الدخل حسب الجهد والالتزام.
+        </p>
+        <p style="margin-top:1rem;">
+          للتقديم، فضلاً أرسل لنا البيانات التالية عبر الواتساب أو البريد:
+        </p>
+        <ul class="why-list">
+          <li>الاسم الثلاثي</li>
+          <li>رقم الجوال</li>
+          <li>المدينة</li>
+          <li>نوع المركبة (سيارة / دراجة / أخرى)</li>
+          <li>الخبرة السابقة في مجال التوصيل (إن وجدت)</li>
+        </ul>
+        <div class="hero-actions" style="margin-top:1.5rem;">
+          <a class="btn btn-primary" href="https://wa.me/966500244450" target="_blank" rel="noopener">قدّم طلبك عبر واتساب</a>
+        </div>
+      </div>
+      <div>
+        <div class="coverage-map" style="background:url('images/delivery-rider.jpg') center/cover no-repeat;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">تواصل معنا</h2>
+      <p class="section-subtitle">
+        للتعاقد أو الاستفسار عن خدماتنا، يسعدنا تواصلكم عبر أي من القنوات التالية.
+      </p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <ul class="contact-list">
+          <li><span class="label">البريد الإلكتروني:</span> logistic@deemnorth.com</li>
+          <li><span class="label">الجوال / واتساب:</span> +966500244450</li>
+          <li><span class="label">الموقع الإلكتروني:</span> deemnorth.com</li>
+          <li><span class="label">الموقع الجغرافي:</span> تبوك – المملكة العربية السعودية</li>
+        </ul>
+      </div>
+      <div>
+        <div class="contact-card">
+          <h3 class="card-title">أرسل لنا رسالة سريعة</h3>
+          <p style="font-size:.9rem;margin-bottom:1rem;">
+            يمكنك التواصل مباشرة عبر البريد، أو نسخ النص التالي وإرساله على الواتساب مع تعديل البيانات:
+          </p>
+          <p style="font-size:.9rem;background:#f6f6f6;padding:.9rem 1rem;border-radius:12px;">
+            السلام عليكم،<br>
+            أرغب في الاستفسار عن خدمات ديم الشمال للخدمات اللوجستية والتعاقد لخدمة التوصيل لمتجري.<br>
+            الاسم: …<br>
+            اسم المتجر / المطعم: …<br>
+            المدينة: …<br>
+            رقم الجوال: …
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      جميع الحقوق محفوظة © ديم الشمال للخدمات اللوجستية – deemnorth.com
+    </div>
+    <div>
+      📧 <a href="mailto:logistic@deemnorth.com">logistic@deemnorth.com</a> &nbsp; | &nbsp;
+      📱 <a href="https://wa.me/966500244450" target="_blank" rel="noopener">+966500244450</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
